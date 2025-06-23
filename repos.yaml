@@ -11,8 +11,9 @@ workflows:
   default:
     plan:
       steps:
+        - run: rm -rf .terraform
         - env: GOOGLE_CREDENTIALS
-        - run: terraform init
+        - run: terraform init -upgrade
         - run: terraform plan -var="google_creds=$GOOGLE_CREDENTIALS" -out=tfplan
     apply:
       steps:
