@@ -7,6 +7,24 @@ repos:
     autoplan:
       enabled: true
       when_modified: ["*.tf", "*.tfvars"]
+# workflows:
+#   default:
+#     plan:
+#       steps:
+#         - run: rm -rf .terraform .terraform.lock.hcl
+#         - run: terraform init
+#         - run: |
+#             echo "Checking if TF_VAR_GOOGLE_CREDENTIALS is set..."
+#             if [ -z "$TF_VAR_GOOGLE_CREDENTIALS" ]; then
+#               echo "ERROR: TF_VAR_GOOGLE_CREDENTIALS is not set"
+#               exit 1
+#             fi
+#             echo "TF_VAR_GOOGLE_CREDENTIALS is set, proceeding with plan..."
+#             terraform plan -var="google_creds=${TF_VAR_GOOGLE_CREDENTIALS}" -out=tfplan
+#     apply:
+#       steps:
+#         - run: terraform apply tfplan
+
 workflows:
   default:
     plan:
@@ -14,13 +32,9 @@ workflows:
         - run: rm -rf .terraform .terraform.lock.hcl
         - run: terraform init
         - run: |
-            echo "Checking if TF_VAR_GOOGLE_CREDENTIALS is set..."
-            if [ -z "$TF_VAR_GOOGLE_CREDENTIALS" ]; then
-              echo "ERROR: TF_VAR_GOOGLE_CREDENTIALS is not set"
-              exit 1
-            fi
-            echo "TF_VAR_GOOGLE_CREDENTIALS is set, proceeding with plan..."
-            terraform plan -var="google_creds=${TF_VAR_GOOGLE_CREDENTIALS}" -out=tfplan
+            echo "Env check: length of GOOGLE_CREDENTIALS = $(echo "$TF_VAR_GOOGLE_CREDENTIALS" | wc -c)"
+            echo "$TF_VAR_GOOGLE_CREDENTIALS" | base64 -d > /tmp/decoded.json || echo "Base64 decode failed"
+            terraform plan -var="google_creds=$TF_VAR_GOOGLE_CREDENTIALS" -out=tfplan
     apply:
       steps:
         - run: terraform apply tfplan
