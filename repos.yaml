@@ -15,7 +15,8 @@ workflows:
         - run: terraform init -upgrade
         - env:
             GOOGLE_CREDENTIALS: GOOGLE_CREDENTIALS
-        - run: terraform plan -var="google_creds=${GOOGLE_CREDENTIALS}" -out=tfplan
+        - run: |
+            terraform plan -var="google_creds=${GOOGLE_CREDENTIALS}" -out=tfplan
     apply:
       steps:
         - run: terraform apply tfplan
