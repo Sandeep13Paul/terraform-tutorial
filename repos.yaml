@@ -13,7 +13,7 @@ workflows:
       steps:
         - env: GOOGLE_CREDENTIALS
         - run: terraform init
-        - run: terraform plan -out=tfplan
+        - run: terraform plan -var="google_creds=$GOOGLE_CREDENTIALS" -out=tfplan
     apply:
       steps:
         - run: terraform apply tfplan
