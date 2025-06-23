@@ -1,0 +1,13 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+# Sensitive credentials
+key.json
+
+# Editor settings
+*.log
+*.bak
+*.swp
+.DS_Store
