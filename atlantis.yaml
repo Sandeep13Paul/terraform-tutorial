@@ -1,6 +1,6 @@
 version: 3
 repos:
-  - id: github.com/Sandeep13Paul/terraform-tutorial
+  - id: https://github.com/Sandeep13Paul/terraform-tutorial
     workflow: default
     allowed_overrides: [workflow]
     allow_custom_workflows: true
