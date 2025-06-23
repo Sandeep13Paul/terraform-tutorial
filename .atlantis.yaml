@@ -1,6 +1,15 @@
 version: 3
-projects:
-  - dir: .
-    autoplan:
-      when_modified: ["*.tf", "*.tfvars"]
-      enabled: true
+repos:
+  - id: github.com/Sandeep13Paul/terraform-tutorial
+    workflow: default
+    allowed_overrides: [workflow]
+    allow_custom_workflows: true
+workflows:
+  default:
+    plan:
+      steps:
+        - run: terraform init
+        - run: terraform plan -out=tfplan
+    apply:
+      steps:
+        - run: terraform apply tfplan
