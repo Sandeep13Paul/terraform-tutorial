@@ -23,7 +23,7 @@ workflows:
 
             echo "$TF_VAR_GOOGLE_CREDENTIALS" > creds.json
             echo "Running Terraform Plan with google_creds from file..."
-            terraform plan -var='google_creds=${file("creds.json")}' -out=tfplan
+            terraform plan -out=tfplan
     apply:
       steps:
         - run: terraform apply tfplan
