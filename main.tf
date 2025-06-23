@@ -4,8 +4,3 @@ provider "google" {
   region      = "us-central1"
   zone        = "us-central1-a"
 }
-
-variable "google_creds" {
-  description = "GCP credentials JSON"
-  type        = string
-}
