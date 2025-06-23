@@ -9,7 +9,7 @@ resource "google_compute_network" "custom-vpc-tf" {
 }
 
 resource "google_compute_subnetwork" "subnet-custom-vpc-tf" {
-  name    = "subnet-custom-vpc-tvf"
+  name    = "subnet-custom-vpc-tfv"
   region  = "asia-southeast1"
   network = google_compute_network.custom-vpc-tf.id
   ip_cidr_range = "10.1.0.0/24"
