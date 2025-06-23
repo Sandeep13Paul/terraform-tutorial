@@ -20,8 +20,10 @@ workflows:
               echo "ERROR: TF_VAR_GOOGLE_CREDENTIALS is not set"
               exit 1
             fi
-            echo "Running Terraform Plan with google_creds..."
-            terraform plan -var="google_creds=$TF_VAR_GOOGLE_CREDENTIALS" -out=tfplan
+
+            echo "$TF_VAR_GOOGLE_CREDENTIALS" > creds.json
+            echo "Running Terraform Plan with google_creds from file..."
+            terraform plan -var='google_creds=${file("creds.json")}' -out=tfplan
     apply:
       steps:
         - run: terraform apply tfplan
