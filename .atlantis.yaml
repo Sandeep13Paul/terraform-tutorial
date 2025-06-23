@@ -4,6 +4,9 @@ repos:
     workflow: default
     allowed_overrides: [workflow]
     allow_custom_workflows: true
+    autoplan:
+      enabled: true
+      when_modified: ["*.tf", "*.tfvars"]
 workflows:
   default:
     plan:
