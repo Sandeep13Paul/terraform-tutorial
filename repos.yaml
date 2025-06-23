@@ -13,10 +13,10 @@ workflows:
       steps:
         - run: rm -rf .terraform .terraform.lock.hcl
         - env:
-            GOOGLE_CREDENTIALS: GOOGLE_CREDENTIALS
+            TF_VAR_GOOGLE_CREDENTIALS: TF_VAR_GOOGLE_CREDENTIALS
         - run: terraform init -upgrade
         - run: |
-            terraform plan -var="google_creds=${GOOGLE_CREDENTIALS}" -out=tfplan
+            terraform plan -var="google_creds=${TF_VAR_GOOGLE_CREDENTIALS}" -out=tfplan
     apply:
       steps:
         - run: terraform apply tfplan
