@@ -11,6 +11,7 @@ workflows:
   default:
     plan:
       steps:
+        - env: GOOGLE_CREDENTIALS
         - run: terraform init
         - run: terraform plan -out=tfplan
     apply:
