@@ -15,8 +15,7 @@ workflows:
         - run: rm -rf .terraform .terraform.lock.hcl
         - run: terraform init
         - run: |
-            echo "Env check: length of GOOGLE_CREDENTIALS = $(echo "$TF_VAR_GOOGLE_CREDENTIALS" | wc -c)"
-            echo "$TF_VAR_GOOGLE_CREDENTIALS" | base64 -d > decoded.json || echo "Base64 decode failed"
+            echo "$TF_VAR_GOOGLE_CREDENTIALS" | base64 -d > decoded.json
             terraform plan
     apply:
       steps:

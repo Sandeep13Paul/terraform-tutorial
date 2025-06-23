@@ -5,6 +5,7 @@
 
 # Sensitive credentials
 key.json
+decoded.json
 
 # Editor settings
 *.log
