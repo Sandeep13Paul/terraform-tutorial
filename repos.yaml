@@ -10,11 +10,6 @@ repos:
 
 workflows:
   default:
-    init:
-      steps:
-        -run: |
-            echo "$TF_VAR_GOOGLE_CREDENTIALS" > creds.json
-            terraform init
     plan:
       steps:
         - run: rm -rf .terraform .terraform.lock.hcl
@@ -30,4 +25,3 @@ workflows:
     apply:
       steps:
         - run: terraform apply tfplan
-        - run: rm -f creds.json
