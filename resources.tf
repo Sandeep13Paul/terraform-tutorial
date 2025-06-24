@@ -1,10 +1,6 @@
 resource "google_compute_network" "auto-vpc-tf" {
   name                    = "auto-vpc-tf"
   auto_create_subnetworks = true
-
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 resource "google_compute_network" "custom-vpc-tf" {
