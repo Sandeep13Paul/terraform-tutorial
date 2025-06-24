@@ -28,7 +28,7 @@ resource "google_compute_firewall" "allow-icmp" {
 
 }
 
-resource "google_storage_bucket" "auto-expire" {
+resource "google_storage_bucket" "your-bucket-name-sandeep" {
   name          = "your-bucket-name-sandeep"
   location      = "US"
   force_destroy = true
@@ -68,6 +68,6 @@ resource "google_storage_bucket" "auto-expire" {
 
 resource "google_storage_bucket_object" "object-sandeep" {
     name = "iphone_logo"
-    bucket = google_storage_bucket.auto-expire.name
+    bucket = google_storage_bucket.your-bucket-name-sandeep.name
     source = "p2.jpg"
 }
