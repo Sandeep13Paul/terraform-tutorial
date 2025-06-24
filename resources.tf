@@ -32,13 +32,27 @@ resource "google_storage_bucket" "auto-expire" {
   name          = "auto-expiring-bucket"
   location      = "US"
   force_destroy = true
+  storage_class = "NEARLINE"
+  labels = {
+    "dep" = "compliance"
+  }
 
   lifecycle_rule {
     condition {
-      age = 5
+      age = 6
     }
     action {
       type = "Delete"
+    }
+  }
+
+  lifecycle_rule {
+    condition {
+        age = 3
+    }
+    action {
+        type = "SetStorageClass"
+        storage_class = "COLDLINE"
     }
   }
 
@@ -50,4 +64,10 @@ resource "google_storage_bucket" "auto-expire" {
       type = "AbortIncompleteMultipartUpload"
     }
   }
+}
+
+resource "google_storage_bucket_object" "object-sandeep" {
+    name = "iphone_logo"
+    bucket = google_storage_bucket.auto-expire.name
+    source = "p2.jpg"
 }
