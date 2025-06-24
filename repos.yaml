@@ -22,7 +22,7 @@ workflows:
             fi
 
             echo "Running Terraform Plan with google_creds from file..."
-            terraform plan -var="google_creds=$TF_VAR_GOOGLE_CREDENTIALS" -out=tfplan
+            terraform plan -var="GOOGLE_CREDENTIALS=$TF_VAR_GOOGLE_CREDENTIALS" -out=tfplan
     apply:
       steps:
         - run: terraform apply tfplan
