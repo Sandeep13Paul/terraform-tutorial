@@ -27,3 +27,27 @@ resource "google_compute_firewall" "allow-icmp" {
     }
 
 }
+
+resource "google_storage_bucket" "auto-expire" {
+  name          = "auto-expiring-bucket"
+  location      = "US"
+  force_destroy = true
+
+  lifecycle_rule {
+    condition {
+      age = 5
+    }
+    action {
+      type = "Delete"
+    }
+  }
+
+  lifecycle_rule {
+    condition {
+      age = 2
+    }
+    action {
+      type = "AbortIncompleteMultipartUpload"
+    }
+  }
+}
